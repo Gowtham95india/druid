@@ -1,9 +1,9 @@
 {
-  "dataSources" : {
-    "metrics" : {
+  "dataSources" : [
+    {
       "spec" : {
         "dataSchema" : {
-          "dataSource" : "metrics",
+          "dataSource" : "tutorial-tranquility-server",
           "parser" : {
             "type" : "string",
             "parseSpec" : {
@@ -63,12 +63,14 @@
         "task.replicants" : "1"
       }
     }
-  },
+  ],
   "properties" : {
     "zookeeper.connect" : "localhost",
     "druid.discovery.curator.path" : "/druid/discovery",
     "druid.selectors.indexing.serviceName" : "druid/overlord",
     "http.port" : "8200",
-    "http.threads" : "8"
+    "http.threads" : "40",
+    "serialization.format" : "smile",
+    "druidBeam.taskLocator": "overlord"
   }
 }

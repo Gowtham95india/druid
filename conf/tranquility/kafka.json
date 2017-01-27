@@ -1,12 +1,184 @@
 {
-  "dataSources" : {
-    "metrics-kafka" : {
+  "dataSources" : [
+    {
       "spec" : {
         "dataSchema" : {
-          "dataSource" : "metrics-kafka",
+          "dataSource" : "vnk-clst",
           "parser" : {
             "type" : "string",
             "parseSpec" : {
+              "format" : "json",
+              "flattenSpec": {
+                "useFieldDiscovery": true,
+                "fields": [
+                  "timestamp",
+                  "event_type",
+                  "user_id", 
+                  "advertiser_id",
+                  "session_id",
+                  "version_name",
+                  "os_name",
+                  "notification_id",
+                  "os_version",
+                  "device_brand",
+                  "device_manufacturer",
+                  "device_model",
+                  "carrier",
+                  "language",
+                  "platform",
+                  "sequence_number",
+                  "lat",
+                  "lng",
+                  "country",
+                  "city",
+                  "region",
+                  "device_id",
+                  "gps_enabled",
+                  "email",
+                  {
+                    "type": "path",
+                    "name": "event_source",
+                    "expr": "$.event_properties.Source"
+                  },
+                  {
+                    "type": "path",
+                    "name": "product_category",
+                    "expr": "$.event_properties.Category"
+                  },
+                  {
+                    "type": "path",
+                    "name": "tinder_action",
+                    "expr": "$.event_properties.Action"
+                  },
+                  {
+                    "type": "path",
+                    "name": "product_id",
+                    "expr": "$.event_properties.Id"
+                  },
+                  {
+                    "type": "path",
+                    "name": "quantity",
+                    "expr": "$.event_properties.quantity"
+
+                  },
+                  {
+                    "type": "path",
+                    "name": "revenue",
+                    "expr": "$.event_properties.price"
+
+                  },
+                  {
+                    "type": "path",
+                    "name": "search_term",
+                    "expr": "$.event_properties.['Search Query']"
+                  },
+                  {
+                    "type": "path",
+                    "name": "profile_menu",
+                    "expr": "$.event_properties.Item"
+                  },
+                  {
+                    "type": "path",
+                    "name": "page_view",
+                    "expr": "$.event_properties.['order type']"
+                  },
+                  {
+                    "type": "path",
+                    "name": "product_images",
+                    "expr": "$.event_properties.images"
+                  },
+                  {
+                    "type": "path",
+                    "name": "seller",
+                    "expr": "$.event_properties.Seller"
+                  },
+                  {
+                    "type": "path",
+                    "name": "seller_rating",
+                    "expr": "$.event_properties.['SellerRating ']"
+                  },
+                  {
+                    "type": "path",
+                    "name": "Brand",
+                    "expr": "$.event_properties.['Brand Name']"
+                  },
+                  {
+                    "type": "path",
+                    "name": "isCouponAvailable",
+                    "expr": "$.event_properties.isCouponAvailable"
+                  },
+                  {
+                    "type": "path",
+                    "name": "product_size",
+                    "expr": "$.event_properties.Size"
+                  },
+                  {
+                    "type": "path",
+                    "name": "payment_mode",
+                    "expr": "$.event_properties.mode"
+                  },
+                  {
+                    "type": "path",
+                    "name": "payment_method",
+                    "expr": "$.event_properties.payment_method"
+                  },
+                  {
+                    "type": "path",
+                    "name": "vendor_order_id",
+                    "expr": "$.event_properties.vendor_order_id"
+                  },
+                  {
+                    "type": "path",
+                    "name": "line_items",
+                    "expr": "$.event_properties.line_items"
+                  },
+                  {
+                    "type": "path",
+                    "name": "order_id",
+                    "expr": "$.event_properties.order_id"
+                  },
+                  {
+                    "type": "path",
+                    "name": "otp_confirmed_for",
+                    "expr": "$.event_properties.buy_complete_cod_new"
+                  },
+                  {
+                    "type": "path",
+                    "name": "cancellation_reason",
+                    "expr": "$.event_properties.state_description"
+                  },
+                  {
+                    "type": "path",
+                    "name": "refund_through",
+                    "expr": "$.event_properties.refund_through"
+                  },
+                  {
+                    "type": "path",
+                    "name": "like_status",
+                    "expr": "$.event_properties.isLiked"
+                  },
+                  {
+                    "type": "path",
+                    "name": "payment_status",
+                    "expr": "$.event_properties.success"
+                  },
+                  {
+                    "type": "path",
+                    "name": "utm_medium",
+                    "expr": "$.event_properties.utm_medium"
+                  },
+                  {
+                    "type": "path",
+                    "name": "utm_source",
+                    "expr": "$.event_properties.utm_source"
+                  },
+                  {
+                    "type": "path",
+                    "name": "utm_campaign",
+                    "expr": "$.event_properties.utm_campaign"
+                  }
+                ]
+              },
               "timestampSpec" : {
                 "column" : "timestamp",
                 "format" : "auto"
@@ -17,8 +189,7 @@
                   "timestamp",
                   "value"
                 ]
-              },
-              "format" : "json"
+              }
             }
           },
           "granularitySpec" : {
@@ -32,19 +203,14 @@
               "name" : "count"
             },
             {
-              "name" : "value_sum",
-              "type" : "doubleSum",
-              "fieldName" : "value"
+              "name" : "session_count",
+              "type" : "count",
+              "fieldName" : "session_id"
             },
-            {
-              "fieldName" : "value",
-              "name" : "value_min",
-              "type" : "doubleMin"
-            },
-            {
-              "type" : "doubleMax",
-              "name" : "value_max",
-              "fieldName" : "value"
+            { 
+              "type" : "hyperUnique",
+              "name" : "hyper_ad_id",
+              "fieldName" : "advertiser_id"
             }
           ]
         },
@@ -61,17 +227,19 @@
       "properties" : {
         "task.partitions" : "1",
         "task.replicants" : "1",
-        "topicPattern" : "metrics"
+        "topicPattern" : "vnk-clst"
       }
     }
-  },
+  ],
   "properties" : {
-    "zookeeper.connect" : "master.example.com",
+    "zookeeper.connect" : "10.2.1.239",
     "druid.discovery.curator.path" : "/druid/discovery",
     "druid.selectors.indexing.serviceName" : "druid/overlord",
     "commit.periodMillis" : "15000",
     "consumer.numThreads" : "2",
-    "kafka.zookeeper.connect" : "kafka-zk.example.com",
-    "kafka.group.id" : "tranquility-kafka"
+    "kafka.zookeeper.connect" : "10.2.1.239",
+    "kafka.group.id" : "tranquility-kafka",
+    "serialization.format" : "smile",
+    "druidBeam.taskLocator": "overlord"
   }
 }

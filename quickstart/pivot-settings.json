@@ -1,0 +1,242 @@
+{
+   "dataCubes" : [
+      {
+         "engine" : "druid",
+         "title" : "Quickstart",
+         "description" : "Datacube for \"wikiticker\"",
+         "source" : "wikiticker",
+         "name" : "wikiticker",
+         "introspection" : "no-autofill",
+         "refreshRule" : {
+            "rule" : "query",
+            "refresh" : "PT1H"
+         },
+         "attributes" : [
+            {
+               "name" : "__time",
+               "type" : "TIME"
+            },
+            {
+               "name" : "page",
+               "type" : "STRING"
+            },
+            {
+               "name" : "user",
+               "type" : "STRING"
+            },
+            {
+               "name" : "channel",
+               "type" : "STRING"
+            },
+            {
+               "name" : "namespace",
+               "type" : "STRING"
+            },
+            {
+               "name" : "comment",
+               "type" : "STRING"
+            },
+            {
+               "name" : "cityName",
+               "type" : "STRING"
+            },
+            {
+               "name" : "countryName",
+               "type" : "STRING"
+            },
+            {
+               "name" : "regionName",
+               "type" : "STRING"
+            },
+            {
+               "name" : "commentLength",
+               "type" : "NUMBER"
+            },
+            {
+               "name" : "deltaBucket",
+               "type" : "NUMBER"
+            },
+            {
+               "name" : "metroCode",
+               "type" : "STRING"
+            },
+            {
+               "name" : "regionIsoCode",
+               "type" : "STRING"
+            },
+            {
+               "name" : "countryIsoCode",
+               "type" : "STRING"
+            },
+            {
+               "name" : "flags",
+               "type" : "STRING"
+            },
+            {
+               "name" : "diffUrl",
+               "type" : "STRING"
+            },
+            {
+               "name" : "isNew",
+               "type" : "BOOLEAN"
+            },
+            {
+               "name" : "isMinor",
+               "type" : "BOOLEAN"
+            },
+            {
+               "name" : "isRobot",
+               "type" : "BOOLEAN"
+            },
+            {
+               "name" : "isUnpatrolled",
+               "type" : "BOOLEAN"
+            },
+            {
+               "name" : "isAnonymous",
+               "type" : "BOOLEAN"
+            },
+            {
+               "name" : "count",
+               "type" : "NUMBER",
+               "unsplitable" : true
+            },
+            {
+               "name" : "delta",
+               "type" : "NUMBER",
+               "unsplitable" : true
+            },
+            {
+               "name" : "added",
+               "type" : "NUMBER",
+               "unsplitable" : true
+            },
+            {
+               "name" : "deleted",
+               "type" : "NUMBER",
+               "unsplitable" : true
+            },
+            {
+               "name" : "user_unique",
+               "special" : "unique",
+               "unsplitable" : true
+            }
+         ],
+         "dimensions" : [
+            {
+               "name" : "__time",
+               "title" : "Time"
+            },
+            {
+               "name" : "page"
+            },
+            {
+               "name" : "user"
+            },
+            {
+               "name" : "channel"
+            },
+            {
+               "name" : "namespace"
+            },
+            {
+               "name" : "comment"
+            },
+            {
+               "name" : "cityName"
+            },
+            {
+               "name" : "countryName"
+            },
+            {
+               "name" : "regionName"
+            },
+            {
+               "name" : "commentLength"
+            },
+            {
+               "name" : "deltaBucket"
+            },
+            {
+               "name" : "metroCode"
+            },
+            {
+               "name" : "regionIsoCode"
+            },
+            {
+               "name" : "countryIsoCode",
+               "geoEncoding": "ISO 3166-1 Alpha-2"
+            },
+            {
+               "name" : "flags"
+            },
+            {
+               "name" : "diffUrl"
+            },
+            {
+               "name" : "isNew"
+            },
+            {
+               "name" : "isMinor"
+            },
+            {
+               "name" : "isRobot"
+            },
+            {
+               "name" : "isUnpatrolled"
+            },
+            {
+               "name" : "isAnonymous"
+            }
+         ],
+         "measures" : [
+            {
+               "name" : "count",
+               "title" : "Edits",
+               "expression" : "$main.sum($count)"
+            },
+            {
+               "name" : "delta"
+            },
+            {
+               "expression" : "$main.sum($delta) / $main.sum($count)",
+               "name" : "avg_delta"
+            },
+            {
+               "name" : "added"
+            },
+            {
+               "name" : "avg_added",
+               "expression" : "$main.sum($added) / $main.sum($count)"
+            },
+            {
+               "name" : "deleted"
+            },
+            {
+               "name" : "avg_deleted",
+               "expression" : "$main.sum($deleted) / $main.sum($count)"
+            },
+            {
+               "expression" : "$main.countDistinct($user_unique)",
+               "title" : "Unique Users",
+               "name" : "unique_users"
+            }
+         ],
+         "defaultPinnedDimensions" : [
+            "page",
+            "user",
+            "namespace"
+         ]
+      }
+   ],
+   "clusters" : [
+      {
+         "type" : "druid",
+         "name" : "druid",
+         "host" : "localhost:8082",
+         "sourceListRefreshOnLoad" : "true",
+         "sourceListRefreshInterval" : "0",
+         "useSegmentMetadata" : "true"
+      }
+   ]
+}

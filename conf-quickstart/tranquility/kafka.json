@@ -1,9 +1,9 @@
 {
-  "dataSources" : {
-    "metrics-kafka" : {
+  "dataSources" : [
+    {
       "spec" : {
         "dataSchema" : {
-          "dataSource" : "metrics-kafka",
+          "dataSource" : "tutorial-tranquility-kafka",
           "parser" : {
             "type" : "string",
             "parseSpec" : {
@@ -61,10 +61,10 @@
       "properties" : {
         "task.partitions" : "1",
         "task.replicants" : "1",
-        "topicPattern" : "metrics"
+        "topicPattern" : "tutorial-tranquility-kafka"
       }
     }
-  },
+  ],
   "properties" : {
     "zookeeper.connect" : "localhost",
     "druid.discovery.curator.path" : "/druid/discovery",
@@ -72,6 +72,8 @@
     "commit.periodMillis" : "15000",
     "consumer.numThreads" : "2",
     "kafka.zookeeper.connect" : "localhost",
-    "kafka.group.id" : "tranquility-kafka"
+    "kafka.group.id" : "tranquility-kafka",
+    "serialization.format" : "smile",
+    "druidBeam.taskLocator": "overlord"
   }
 }
