@@ -152,7 +152,6 @@ def druid_install(data):
             "Unable to fetch druid from the %s repo. Skipping installation..!" % github)
     else:
         git_user, git_repo = git_resolver(github)
-        command_center("apt-get install git")
         command_center("git clone %s -b %s /tmp/druid-%s" %
                        (git_constructor(git_user, git_repo), version, version))
         command_center("mv /tmp/druid-%s /var/lib/" %
@@ -235,4 +234,3 @@ with open(config_file, 'r') as stream:
             
         except yaml.YAMLError as exc:
             print exc
-
