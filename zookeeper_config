@@ -1,0 +1,9 @@
+tickTime=#{tickTime},
+initLimit=#{initLimit},
+syncLimit=#{syncLimit},
+dataDir=/tmp/zookeeper,
+clientPort=#{clientPort},
+clientPortAddress=#{clientPortAddress},
+maxClientCnxns=#{maxClientCnxns},
+autopurge.snapRetainCount=#{autopurge.snapRetainCount},
+autopurge.purgeInterval=#{autopurge.purgeInterval}
