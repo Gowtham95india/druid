@@ -144,7 +144,6 @@ def command_center(install_cmd, exit_on_fail=False):
 
 
 def druid_install(data):
-    node = data['node']
     github = data['github']
     version = data['branch'] if data['branch'] else 'master'
     if not get_git_branches(github, version):
@@ -165,8 +164,8 @@ def mysql_install(data):
     command_center("apt-get install -y mysql-server")
     command_center("service mysql start")
     command_center("mysql -u root -p'%s' -e 'create database %s'"%(data['password'], data['database']))
-    command_center("mysql -u root -p'%s' -e 'create user \"%s\"@\"\%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
-    command_center("mysql -u root -p'%s' -e 'grant all on druid.* to \"%s\"@\"\%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
+    command_center("mysql -u root -p'%s' -e 'create user \"%s\"@\"%%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
+    command_center("mysql -u root -p'%s' -e 'grant all on druid.* to \"%s\"@\"%%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
 
 def kafka_install(data):
     command_center("curl http://redrockdigimark.com/apachemirror/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz > /tmp/kafka_2.11-0.9.0.0.tgz")
