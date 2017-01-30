@@ -9,4 +9,8 @@ services:
         github: git@github.com:Gowtham95india/druid.git
         branch: v2
     mysql:
+        password: vdp$6
+        database: druid
+        dbuser: druid
+        dbpassword: duird
     zookeeper:
