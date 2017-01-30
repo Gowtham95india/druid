@@ -161,7 +161,13 @@ def druid_install(data):
 
 
 def mysql_install(data):
+    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password password %s"%data['password'])
+    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password %s"%data['password'])
     command_center("apt-get install -y mysql-server")
+    command_center("service mysql start")
+    command_center("mysql -u root -p'%s' -e 'create database %s'"%(data['password'], data['database']))
+    command_center("mysql -u root -p'%s' -e 'create user \"%s\"@\"%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
+    command_center("mysql -u root -p'%s' -e 'grant all on druid.* to \"%s\"@\"%\" IDENTIFIED BY \"%s\"'"%(data['password'],data['dbuser'], data['dbpassword']))
 
 def kafka_install(data):
     command_center("curl http://redrockdigimark.com/apachemirror/kafka/0.9.0.0/kafka_2.11-0.9.0.0.tgz > /tmp/kafka_2.11-0.9.0.0.tgz")
