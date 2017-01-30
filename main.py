@@ -161,8 +161,8 @@ def druid_install(data):
 
 
 def mysql_install(data):
-    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password password %s"%data['password'])
-    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password %s"%data['password'])
+    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password password %s'"%data['password'])
+    command_center("debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password %s'"%data['password'])
     command_center("apt-get install -y mysql-server")
     command_center("service mysql start")
     command_center("mysql -u root -p'%s' -e 'create database %s'"%(data['password'], data['database']))
