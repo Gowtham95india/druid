@@ -1,0 +1,1 @@
+"use strict";var nike_hercules_1=require("@implydata/nike-hercules");var router=nike_hercules_1.HerculesServer.makeRouter();router.get("/",function(e,r){r.send("I am healthy @ "+(new Date).toISOString())});module.exports=router;

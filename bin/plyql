@@ -1,0 +1,10 @@
+#!/bin/bash -eu
+
+PWD="$(pwd)"
+WHEREAMI="$(dirname "$0")"
+WHEREAMI="$(cd "$WHEREAMI" && pwd)"
+
+"$WHEREAMI"/../bin/verify-node
+
+cd "$WHEREAMI/.."
+exec node "$WHEREAMI"/../dist/pivot/node_modules/plyql/bin/plyql "$@"

@@ -1,0 +1,1 @@
+"use strict";function listItemize(t,e){return function(i){return{label:i[t],value:i[e]}}}exports.listItemize=listItemize;

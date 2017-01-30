@@ -1,0 +1,1 @@
+"use strict";var timekeeper_1=require("./timekeeper");var TimekeeperMock=function(){function e(){}e.fixedJS=function(){return{timeTags:[],nowOverride:new Date("2016-08-08T08:08:08Z")}};e.fixed=function(){return timekeeper_1.Timekeeper.fromJS(e.fixedJS())};return e}();exports.TimekeeperMock=TimekeeperMock;

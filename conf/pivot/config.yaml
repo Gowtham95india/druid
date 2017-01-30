@@ -1,0 +1,56 @@
+# The port on which the Pivot server will listen on.
+port: 9095
+
+# Pivot runtime directory
+varDir: var/pivot
+
+#
+# Pivot Settings (clusters and dataSources) can be stored in three ways.
+# Choose just one option and comment out the others.
+#
+#  1) Hard-coded in this config file. Settings View will be disabled at runtime.
+#  2) Stored in a file in varDir, editable at runtime with Settings View. Not suitable for running in a cluster.
+#  3) Stored in a MySQL database, editable at runtime with Settings View. Works well with a cluster of Pivot servers.
+#
+# In this config file we have chosen #1.
+#
+
+#
+# 1) Hard-coded settings
+#
+
+settings:
+  clusters:
+    - name: druid
+      type: druid
+      host: localhost:8082 # Druid broker
+
+  # Data source definitions will go here
+  dataCubes: []
+
+#
+# 2) File-backed settings (not suitable for running in a cluster)
+#
+
+# settingsLocation:
+#   location: file
+#   format: 'json-pretty'
+#   initialSettings:
+#     clusters:
+#       - name: druid
+#         type: druid
+#         host: localhost:8082
+
+#
+# 3) Database-backed settings
+#
+
+# settingsLocation:
+#   location: mysql
+#   uri: 'mysql://user:pw@192.168.99.100:3306/pivot',
+#   table: 'pivot_state'
+#   initialSettings:
+#     clusters:
+#       - name: druid
+#         type: druid
+#         host: localhost:8082

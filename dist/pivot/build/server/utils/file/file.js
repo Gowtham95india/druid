@@ -1,0 +1,1 @@
+"use strict";var fs=require("fs");var yaml=require("js-yaml");function loadFileSync(e,a){if(a===void 0){a=null}var l=fs.readFileSync(e,"utf-8");if(a==="json"){l=JSON.parse(l)}else if(a==="yaml"){l=yaml.safeLoad(l)}return l}exports.loadFileSync=loadFileSync;
