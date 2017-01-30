@@ -134,7 +134,7 @@ def command_center(install_cmd, exit_on_fail=False):
     install_cmd = "echo '%s' | sudo -S " % sudo_pass + install_cmd
     logger.info("Running command: %s"%install_cmd)
     exec_cmd = subprocess.Popen(
-        install_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        install_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, executable="/bin/bash")
     exec_output, exec_error = exec_cmd.communicate()
     if exec_cmd.returncode != 0:
         logger.fatal("Error while installing. Check below and logs file:")
