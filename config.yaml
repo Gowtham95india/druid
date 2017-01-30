@@ -1,0 +1,12 @@
+over_ssh: false
+services:
+    kafka:
+    nodejs:
+        github: git@github.com:Gowtham95india/CapVengine.git
+        branch: master
+    memcached:
+    druid:
+        github: git@github.com:Gowtham95india/druid.git
+        branch: v2
+    mysql:
+    zookeeper:
