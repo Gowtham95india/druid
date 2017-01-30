@@ -216,8 +216,8 @@ def nodejs_install(data):
     command_center("pm2 set logrotate:rotateInterval '* * */1 * *'")
     command_center("pm2 save")
 
-def memcahched_install(data):
-    command_center("apt-get install -y memcahched")
+def memcached_install(data):
+    command_center("apt-get install -y memcached")
 
 with open(config_file, 'r') as stream:
         try:
