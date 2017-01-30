@@ -222,6 +222,7 @@ with open(config_file, 'r') as stream:
                 for request in services.keys():
                     logger.info("Going to install %s"%request)
                     exec(request + "_install(%s)" % services[request])
+                    logger.info("%s Installation Done.!"%request)
             else:
                 for host in custom_json['hosts'].keys():
                     s(host)
