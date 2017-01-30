@@ -218,7 +218,7 @@ with open(config_file, 'r') as stream:
             custom_json = yaml.load(stream)
             if not custom_json['over_ssh']:
                 general_config()
-        services = custom_json['services']
+                services = custom_json['services']
                 for request in services.keys():
                     logger.info("Going to install %s"%request)
                     exec(request + "_install(%s)" % services[request])
