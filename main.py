@@ -155,7 +155,7 @@ def druid_install(data):
         command_center("apt-get install git")
         command_center("git clone %s -b %s /tmp/druid-%s" %
                        (git_constructor(git_user, git_repo), version, version))
-        command_center("mv /tmp/druid-%s/ /var/lib/" %
+        command_center("mv /tmp/druid-%s /var/lib/" %
                        (version))
         command_center("ln -s /var/lib/druid-%s /var/lib/druid" % (version))
 
@@ -205,7 +205,7 @@ def nodejs_install(data):
         git_user, git_repo = git_resolver(github)
         command_center("git clone %s -b %s /tmp/capeve-%s" %
                        (git_constructor(git_user, git_repo), version, version))
-        command_center("mv /tmp/capeve-%s/ /var/lib/" %
+        command_center("mv /tmp/capeve-%s /var/lib/" %
                        (version))
         command_center("ln -s /var/lib/capeve-%s /var/lib/capeve" % (version))
 
